@@ -52,7 +52,7 @@ const Button: React.FC<ButtonProps> = ({
 
             </Icon>
         )}
-        {label }
+        {label}
     </button>
   );
 }
