@@ -5,10 +5,10 @@ import React from 'react'
 import Logo from "./Logo"
 import Search from './Search';
 import UserMenu from './UserMenu';
-import { SafeUser } from '@/app/types';
+import { User } from '@prisma/client';
 
 interface NavbarProps {
-  currentUser?: SafeUser  | null;
+  currentUser?: User | null;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
