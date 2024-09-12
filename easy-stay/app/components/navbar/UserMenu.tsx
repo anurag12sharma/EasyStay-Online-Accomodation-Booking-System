@@ -21,9 +21,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
-
-  console.log("Hello");
-  console.log(currentUser)
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
