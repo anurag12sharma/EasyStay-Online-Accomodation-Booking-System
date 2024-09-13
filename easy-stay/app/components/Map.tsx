@@ -9,7 +9,7 @@ import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 // @ts-ignore
-delete L.Icon.Default.prototype._getIconUrl;
+// delete L.Icon.Default.prototype._getIconUrl;
 
 interface MapProps {
   center?: number[];
@@ -31,6 +31,7 @@ const Map: React.FC<MapProps> = ({ center }) => {
         <Marker 
             position={center as L.LatLngExpression}
         />
+        
         )}
     </MapContainer>
   );
