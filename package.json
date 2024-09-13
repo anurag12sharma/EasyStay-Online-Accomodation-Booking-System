@@ -1,5 +1,12 @@
 {
   "dependencies": {
-    "query-string": "^9.1.0"
+    "leaflet": "^1.9.4",
+    "query-string": "^9.1.0",
+    "react-leaflet": "^4.2.1",
+    "react-select": "^5.8.0",
+    "world-countries": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.12"
   }
 }
