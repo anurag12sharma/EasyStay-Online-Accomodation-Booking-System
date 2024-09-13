@@ -1,0 +1,23 @@
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "lib": ["dom", "esnext"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmit": false,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "target": "esnext",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+  },
+  "exclude": ["node_modules"]
+}
