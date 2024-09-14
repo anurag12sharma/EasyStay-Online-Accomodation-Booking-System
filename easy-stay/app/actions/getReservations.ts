@@ -47,7 +47,11 @@ export default async function getReservations(
     }));
 
     return safeReservations;
-    } catch(error: any){
-        throw new Error(error);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to fetch listing by ID: ${error.message}`);
+        } else {
+            throw new Error('An unexpected error occurred while fetching the listing.');
+        }
     }
 }

@@ -30,7 +30,11 @@ export default async function getCurrentUser(){
             updatedAt: currentUser.updatedAt.toISOString(),
             emailVerified: currentUser.emailVerified?.toISOString() || null
         };
-    } catch (error : any) {
-        return null;
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to fetch listing by ID: ${error.message}`);
+        } else {
+            throw new Error('An unexpected error occurred while fetching the listing.');
+        }
     }
 }
