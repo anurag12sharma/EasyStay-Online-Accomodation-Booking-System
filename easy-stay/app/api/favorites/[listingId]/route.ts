@@ -12,16 +12,16 @@ export async function POST(
 ) {
     const currentUser = await getCurrentUser();
     if(!currentUser){
-        return NextResponse.error();
+        return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
     }
 
     const {listingId} = params;
 
     if (!listingId || typeof listingId !== 'string'){
-        throw new Error('Invalid ID');
+        return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
     }
 
-    let favoriteIds = [...(currentUser.favoriteIds || [])];
+    let favoriteIds = Array.isArray(currentUser.favoriteIds) ? [...currentUser.favoriteIds] : [];
 
     favoriteIds.push(listingId);
 
@@ -57,13 +57,14 @@ export async function DELETE(
 
     favoriteIds = favoriteIds.filter((id)=>id!==listingId);
 
-    const user = await prisma.user.update({
-        where: {
-            id: currentUser.id
-        },
-        data: {
-            favoriteIds
-        }
-    });
-    return NextResponse.json(user);
+    try {
+        const user = await prisma.user.update({
+            where: { id: currentUser.id },
+            data: { favoriteIds }
+        });
+        return NextResponse.json(user);
+    } catch (error) {
+        console.error('Prisma update error:', error);
+        return NextResponse.json({ error: 'Failed to update user' }, { status: 500 });
+    }
 }
