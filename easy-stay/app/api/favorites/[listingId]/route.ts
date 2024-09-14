@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import getCurrentUser from '@/app/actions/getCurrentUser';
-import prisma from '@/app/libs/prismadb';
+import { NextResponse } from "next/server";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import prisma from "@/app/libs/prismadb";
 
 interface IParams {
     listingId?: string;
@@ -9,10 +9,9 @@ interface IParams {
 export async function POST(
     request: Request,
     { params }: { params: IParams }
-) {
+): Promise<NextResponse> {
     try {
         const currentUser = await getCurrentUser();
-
         if (!currentUser) {
             return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
         }
@@ -20,10 +19,10 @@ export async function POST(
         const { listingId } = params;
 
         if (!listingId || typeof listingId !== 'string') {
-            return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+            return NextResponse.json({ error: 'Invalid listing ID' }, { status: 400 });
         }
 
-        let favoriteIds = Array.isArray(currentUser.favoriteIds) ? [...currentUser.favoriteIds] : [];
+        let favoriteIds = [...(currentUser.favoriteIds || [])];
         favoriteIds.push(listingId);
 
         const user = await prisma.user.update({
@@ -41,10 +40,9 @@ export async function POST(
 export async function DELETE(
     request: Request,
     { params }: { params: IParams }
-) {
+): Promise<NextResponse> {
     try {
         const currentUser = await getCurrentUser();
-
         if (!currentUser) {
             return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
         }
@@ -52,11 +50,11 @@ export async function DELETE(
         const { listingId } = params;
 
         if (!listingId || typeof listingId !== 'string') {
-            return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+            return NextResponse.json({ error: 'Invalid listing ID' }, { status: 400 });
         }
 
-        let favoriteIds = Array.isArray(currentUser.favoriteIds) ? [...currentUser.favoriteIds] : [];
-        favoriteIds = favoriteIds.filter((id) => id !== listingId);
+        let favoriteIds = [...(currentUser.favoriteIds || [])];
+        favoriteIds = favoriteIds.filter(id => id !== listingId);
 
         const user = await prisma.user.update({
             where: { id: currentUser.id },
