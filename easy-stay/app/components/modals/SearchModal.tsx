@@ -14,6 +14,16 @@ import Heading from '../Heading';
 import Calendar from '../inputs/Calendar';
 import Counter from '../inputs/Counter';
 
+interface QueryParams {
+    locationValue?: string;
+    guestCount?: number;
+    roomCount?: number;
+    bathroomCount?: number;
+    startDate?: string;
+    endDate?: string;
+    [key: string]: any; // Allow for additional dynamic properties
+}
+
 enum STEPS {
     LOCATION = 0,
     DATE = 1,
@@ -59,7 +69,7 @@ const SearchModal = () => {
             currentQuery = qs.parse(params.toString());
         }
 
-        const updatedQuery: any = {
+        const updatedQuery: QueryParams = {
             ...currentQuery,
             locationValue: location?.value,
             guestCount,
@@ -97,12 +107,12 @@ const SearchModal = () => {
         params
     ]);
 
-    const actionLabel = useMemo(()=>{
-        if(step===STEPS.INFO){
-            return 'Submit';
-        }
-        return 'Next';
-    },[])
+    // const actionLabel = useMemo(()=>{
+    //     if(step===STEPS.INFO){
+    //         return 'Submit';
+    //     }
+    //     return 'Next';
+    // },[])
 
     const secondaryActionLabel = useMemo(()=>{
         if(step===STEPS.LOCATION){

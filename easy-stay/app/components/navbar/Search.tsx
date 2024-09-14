@@ -21,7 +21,7 @@ const Search = () => {
             return getByValue(locationValue as string)?.label;
         }
         return 'Anywhere';
-    },[getByValue,location]);
+    },[getByValue,locationValue]);
 
     const durationLabel = useMemo(()=>{
         if (startDate && endDate){

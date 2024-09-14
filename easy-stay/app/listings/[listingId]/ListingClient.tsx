@@ -4,11 +4,10 @@ import { SafeUser, safeListings, safeReservations } from '@/app/types';
 import Container from '@/app/components/Container';
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ListingHead from '@/app/components/listings/ListingHead';
-import { list } from 'postcss';
 import ListingInfo from '@/app/components/listings/ListingInfo';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import { useRouter } from 'next/navigation';
-import { differenceInCalendarDays, differenceInDays, eachDayOfInterval, setDate } from 'date-fns';
+import { differenceInCalendarDays, eachDayOfInterval } from 'date-fns';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Range } from 'react-date-range';

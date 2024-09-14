@@ -11,16 +11,6 @@ import RentModal from "./components/modals/RentModal";
 import ClientOnly from "./components/ClientOnly";
 import SearchModal from "./components/modals/SearchModal";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Easy-Stay",

@@ -1,12 +1,11 @@
 'use client';
 import React, { useCallback, useState } from 'react'
-import { SafeUser, safeListings, safeReservations } from '../types';
+import { SafeUser, safeListings } from '../types';
 import Container from '../components/Container';
 import Heading from '../components/Heading';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { error } from 'console';
 import ListingCard from '../components/listings/ListingCard';
 
 interface FavoriteClientProps {
@@ -19,23 +18,23 @@ const FavoriteClient:React.FC<FavoriteClientProps> = ({
     currentUser
 }) => {
     const router = useRouter();
-    const [deletingId, setDeletingId] = useState('');
+    // const [deletingId, setDeletingId] = useState('');
 
-    const onCancel = useCallback((id: string)=>{
-        setDeletingId(id);
+    // const onCancel = useCallback((id: string)=>{
+    //     setDeletingId(id);
 
-        axios.delete(`/api/reservations/${id}`)
-        .then(()=>{
-            toast.success('Reservation Cancelled');
-            router.refresh();
-        })
-        .catch((error)=>{
-            toast.error(error?.response?.data?.error);
-        })
-        .finally(()=>{
-            setDeletingId('');
-        })
-    },[router])
+    //     axios.delete(`/api/reservations/${id}`)
+    //     .then(()=>{
+    //         toast.success('Reservation Cancelled');
+    //         router.refresh();
+    //     })
+    //     .catch((error)=>{
+    //         toast.error(error?.response?.data?.error);
+    //     })
+    //     .finally(()=>{
+    //         setDeletingId('');
+    //     })
+    // },[router])
 
   return (
     <Container>

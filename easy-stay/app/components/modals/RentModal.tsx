@@ -268,7 +268,7 @@ const RentModal = () => {
         isOpen = {rentModal.isOpen}
         onClose={rentModal.onClose}
         onSubmit={handleSubmit(onSubmit)}
-        actionLable={actionLabel}
+        actionLabel={actionLabel}
         secondaryActionLabel={secondaryActionLabel}
         secondaryAction={step===STEPS.CATEGORY?undefined:onBack}
         title='Become a Host'
