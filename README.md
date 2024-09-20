@@ -24,7 +24,7 @@
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (via Prisma ORM)
 - **Authentication**: NextAuth.js (Google, GitHub authentication)
-- **Maps**: Integrated with Mapbox
+- **Maps**: Integrated with Leaflet
 - **Cloud Storage**: Cloudinary (for image uploads)
 
   
