@@ -15,7 +15,9 @@ export default async function getListings(){
 
         return safeListings;
 
-    } catch(error: any){
-        throw new Error(error);
-    }
+    } catch (error: unknown) {
+        if (error instanceof Error) throw error;
+        throw new Error(String(error));
+      }
+      
 }

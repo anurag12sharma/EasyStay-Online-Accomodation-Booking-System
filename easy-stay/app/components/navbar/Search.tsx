@@ -54,7 +54,7 @@ const Search = () => {
                 <div className='hidden sm:block'>Add Guests</div>
                 <div className='
                     p-2
-                    bg-[#d1bb9b]
+                    bg-blue-500
                     rounded-full
                     text-white
                 '>

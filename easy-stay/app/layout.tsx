@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { Nunito } from "next/font/google";
 import { Navbar } from "./components/navbar/Navbar";
@@ -9,17 +8,6 @@ import LoginModal from "./components/modals/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
 import RentModal from "./components/modals/RentModal";
 import ClientOnly from "./components/ClientOnly";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Easy-Stay",
@@ -38,17 +26,19 @@ export default async function RootLayout({
   const currentUser = await getCurrentUser();
   return (
     <html lang="en">
-      <body className={font.className}>  
+      <body className={font.className}>
         <ClientOnly>
-          <RentModal/>
+          <RentModal />
           <ToasterProvider />
-          <LoginModal/>
-          <RegisterModal/>
-          <Navbar currentUser={currentUser}/>
+          <LoginModal />
+          <RegisterModal />
+          <Navbar currentUser={currentUser} />
         </ClientOnly>
-        <div className="pb-20 pt-28">
-          {children}
-        </div>
+        <div className="pb-10 pt-28">{children}</div>
+        <footer className="w-full bg-muted text-center text-xs text-neutral-500 py-4 mt-8 border-t">
+          © {new Date().getFullYear()} EasyStay. Made with{" "}
+          <span className="text-pink-500">♥</span> by Anurag Sharma.
+        </footer>
       </body>
     </html>
   );

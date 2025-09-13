@@ -14,7 +14,7 @@ const Avatar:React.FC<AvatarProps>= ({
   return (
     <div>
       {src ? (
-        <Image src={src} alt="Avatar" width={30} height={30} />
+        <Image src={src} alt="Avatar" width={30} height={30} className='rounded-full'/>
       ) : (
         <FaUserCircle size={30} color="gray" />
       )}

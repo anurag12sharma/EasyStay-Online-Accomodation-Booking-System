@@ -1,5 +1,4 @@
 'use client';
-import { error } from 'console';
 import React from 'react'
 import {FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { TbCurrencyRupee } from "react-icons/tb";
@@ -40,11 +39,11 @@ const Input: React.FC<InputProps> = ({
             />
         )}
         <input
-            id='id'
+            id={id}
             disabled={disabled}
             {...register(id,{required})}
             placeholder=" "
-            type='type'
+            type={type}
             className={`
                 peer
                 w-full

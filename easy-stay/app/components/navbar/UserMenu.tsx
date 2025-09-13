@@ -48,8 +48,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                     px-4
                     rounded-full
                     hover:bg-neutral-100
+                    hover:text-black
                     transition
                     cursor-pointer
+                    bg-blue-500
+                    text-white
                 "
         >
           Become a Host
