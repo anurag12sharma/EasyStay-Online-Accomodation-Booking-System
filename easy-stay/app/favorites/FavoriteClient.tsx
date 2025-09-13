@@ -1,48 +1,53 @@
-'use client';
-import React, { useCallback, useState } from 'react'
-import { SafeUser, safeListings} from '../types';
-import Container from '../components/Container';
-import Heading from '../components/Heading';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
-import { toast } from 'react-hot-toast';
-import ListingCard from '../components/listings/ListingCard';
+"use client";
+import React, { useCallback, useState } from "react";
+import { SafeUser, safeListings } from "../types";
+import Container from "../components/Container";
+import Heading from "../components/Heading";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import ListingCard from "../components/listings/ListingCard";
 
 interface FavoriteClientProps {
-    listings: safeListings[];
-    currentUser?: SafeUser| null;
+  listings: safeListings[];
+  currentUser?: SafeUser | null;
 }
 
-const FavoriteClient:React.FC<FavoriteClientProps> = ({
-    listings,
-    currentUser
+const FavoriteClient: React.FC<FavoriteClientProps> = ({
+  listings,
+  currentUser,
 }) => {
-    const router = useRouter();
-    const [deletingId, setDeletingId] = useState('');
+  const router = useRouter();
+  const [deletingId, setDeletingId] = useState("");
 
-    const onCancel = useCallback((id: string)=>{
-        setDeletingId(id);
+  const onCancel = useCallback(
+    (id: string) => {
+      setDeletingId(id);
 
-        axios.delete(`/api/reservations/${id}`)
-        .then(()=>{
-            toast.success('Reservation Cancelled');
-            router.refresh();
+      axios
+        .delete(`/api/reservations/${id}`)
+        .then(() => {
+          toast.success("Reservation Cancelled");
+          router.refresh();
         })
-        .catch((error)=>{
-            toast.error(error?.response?.data?.error);
+        .catch((error) => {
+          toast.error(error?.response?.data?.error);
         })
-        .finally(()=>{
-            setDeletingId('');
-        })
-    },[router])
+        .finally(() => {
+          setDeletingId("");
+        });
+    },
+    [router]
+  );
 
   return (
     <Container>
-        <Heading
-            title='Favorites'
-            subtitle="List of Places you have favorited!"
-        />
-        <div className='
+      <Heading
+        title="Favorites"
+        subtitle="List of Places you have favorited!"
+      />
+      <div
+        className="
             mt-10
             grid
             grid-cols-1
@@ -52,15 +57,20 @@ const FavoriteClient:React.FC<FavoriteClientProps> = ({
             xl:grid-cols-5
             2xl:grid-cols-6
             gap-8
-        '>
-            {listings.map((listing)=>(
-                <ListingCard
-                    key={listing.id}
-                    data={listing}
-                    currentUser={currentUser}
-                />
-            ))}
-        </div>
+        "
+      >
+        {listings.map((listing) => (
+          <ListingCard
+            key={listing.id}
+            data={listing}
+            currentUser={currentUser}
+            actionId={listing.id}
+            onAction={onCancel}
+            disabled={deletingId === listing.id}
+            actionLabel="Remove"
+          />
+        ))}
+      </div>
     </Container>
   );
 };

@@ -4,16 +4,8 @@ import {CldUploadWidget, CloudinaryUploadWidgetResults, CloudinaryUploadWidgetIn
 import { TbPhotoPlus } from 'react-icons/tb';
 import Image from 'next/image';
 
-interface CloudinaryUploadResult {
-    info: {
-      secure_url: string;
-      [key: string]: unknown; // you can expand this as needed
-    };
-    [key: string]: unknown;
-}
-
 declare global{
-    var cloudinary: unknown;
+    let cloudinary: unknown;
 }
 
 interface ImageUploadProps{
